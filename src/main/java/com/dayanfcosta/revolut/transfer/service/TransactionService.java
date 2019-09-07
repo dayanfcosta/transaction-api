@@ -1,16 +1,15 @@
 package com.dayanfcosta.revolut.transfer.service;
 
+import com.dayanfcosta.revolut.transfer.api.dto.TransactionDto;
 import com.dayanfcosta.revolut.transfer.command.transaction.TransactionSaveCommand;
 import com.dayanfcosta.revolut.transfer.exception.AccountNotFoundException;
-import com.dayanfcosta.revolut.transfer.exception.TransactionExecutorNotFound;
 import com.dayanfcosta.revolut.transfer.exception.TransactionNotFoundException;
-import com.dayanfcosta.revolut.transfer.executor.TransactionExecutor;
+import com.dayanfcosta.revolut.transfer.executor.ExecutorManager;
 import com.dayanfcosta.revolut.transfer.model.account.Account;
 import com.dayanfcosta.revolut.transfer.model.transaction.Transaction;
 import com.dayanfcosta.revolut.transfer.model.transaction.TransactionBuilder;
 import com.dayanfcosta.revolut.transfer.repository.AccountRepository;
 import com.dayanfcosta.revolut.transfer.repository.TransactionRepository;
-import com.dayanfcosta.revolut.transfer.api.dto.TransactionDto;
 
 import javax.inject.Singleton;
 import java.util.List;
@@ -23,20 +22,21 @@ import java.util.stream.Collectors;
 @Singleton
 public class TransactionService {
 
-  private final List<TransactionExecutor> executors;
+  private final ExecutorManager executorManager;
   private final AccountRepository accountRepository;
   private final TransactionRepository transactionRepository;
 
-  public TransactionService(AccountRepository accountRepository, TransactionRepository transactionRepository,
-                            List<TransactionExecutor> executors) {
-    this.executors = executors;
+  public TransactionService(AccountRepository accountRepository,
+                            TransactionRepository transactionRepository,
+                            ExecutorManager executorManager) {
+    this.executorManager = executorManager;
     this.accountRepository = accountRepository;
     this.transactionRepository = transactionRepository;
   }
 
   public Transaction create(TransactionSaveCommand command) {
     final var transaction = transactionRepository.save(transaction(command));
-    executor(transaction).execute(transaction);
+    executorManager.execute(transaction);
     return transaction;
   }
 
@@ -54,13 +54,7 @@ public class TransactionService {
     return new TransactionDto(transaction);
   }
 
-  private TransactionExecutor executor(Transaction transaction) {
-    return executors.stream().filter(executor -> executor.apply(transaction))
-        .findFirst()
-        .orElseThrow(() -> new TransactionExecutorNotFound(transaction));
-  }
-
-  private Transaction transaction(TransactionSaveCommand command) {
+  private Transaction transaction(final TransactionSaveCommand command) {
     var sourceAccount = account(command.getSourceId()).orElseThrow(AccountNotFoundException::new);
     return TransactionBuilder.create()
         .source(sourceAccount)
@@ -73,4 +67,5 @@ public class TransactionService {
   private Optional<Account> account(long id) {
     return accountRepository.findById(id);
   }
+
 }

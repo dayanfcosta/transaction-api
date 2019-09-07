@@ -5,7 +5,7 @@ import com.dayanfcosta.revolut.transfer.model.transaction.Transaction;
 /**
  * @author dayan.costa
  */
-public interface TransactionExecutor {
+interface TransactionExecutor {
 
   void execute(Transaction transaction);
 

@@ -62,7 +62,7 @@ public class Transaction {
     return type;
   }
 
-  String getErrorMessage() {
+  public String getErrorMessage() {
     return errorMessage;
   }
 

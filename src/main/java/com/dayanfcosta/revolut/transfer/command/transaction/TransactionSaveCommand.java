@@ -20,6 +20,17 @@ public final class TransactionSaveCommand {
   @NotNull(message = "Transaction must have a type")
   private TransactionType type;
 
+  TransactionSaveCommand() {
+    super();
+  }
+
+  public TransactionSaveCommand(long sourceId, long destinationId, BigDecimal ammount, TransactionType type) {
+    this.destinationId = destinationId;
+    this.sourceId = sourceId;
+    this.ammount = ammount;
+    this.type = type;
+  }
+
   public long getSourceId() {
     return sourceId;
   }
