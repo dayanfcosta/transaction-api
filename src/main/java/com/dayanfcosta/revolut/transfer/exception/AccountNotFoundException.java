@@ -6,6 +6,6 @@ package com.dayanfcosta.revolut.transfer.exception;
 public class AccountNotFoundException extends RuntimeException {
 
   public AccountNotFoundException() {
-    super("Invalid account");
+    super("Account does not exist");
   }
 }
