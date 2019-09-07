@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.dayanfcosta.revolut.transfer
+---
+testFramework: junit
+sourceLanguage: java

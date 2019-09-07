@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: money-transfer
+  server:
+    port: 8888
