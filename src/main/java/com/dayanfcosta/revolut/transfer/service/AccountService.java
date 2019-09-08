@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class AccountService {
   @Inject
   private AccountRepository accountRepository;
 
-  public Account create(AccountSaveCommand command) {
+  public Account create(@Valid AccountSaveCommand command) {
     LOGGER.debug("Inserting account {}", command);
     Validate.notNull(command, "Invalid account data");
     var created = accountRepository.save(Account.from(command));

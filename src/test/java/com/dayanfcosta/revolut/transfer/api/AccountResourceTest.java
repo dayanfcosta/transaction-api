@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static io.micronaut.http.HttpHeaders.LOCATION;
+import static io.micronaut.http.HttpRequest.GET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -49,7 +50,7 @@ class AccountResourceTest {
   }
 
   @Test
-  @DisplayName("Should save a new account")
+  @DisplayName("Should create a new account")
   void testSave() {
     assertThat(repository.findAll()).hasSize(0);
 
@@ -62,9 +63,9 @@ class AccountResourceTest {
   @Test
   @DisplayName("Should return an account with the specified ID")
   void testById() {
-    var response = client().exchange(HttpRequest.POST("/api/accounts", command));
+    var account = repository.save(new Account("1"));
 
-    var account = client().retrieve(HttpRequest.GET(response.header(LOCATION)), Account.class);
+    account = client().retrieve(GET("/api/accounts/" + account.getId()), Account.class);
 
     assertThat(account).isNotNull();
     assertThat(account.getId()).isGreaterThan(0);
@@ -77,7 +78,7 @@ class AccountResourceTest {
     insertAccounts(totalAccounts);
 
     var accounts = client()
-        .retrieve(HttpRequest.GET("/api/accounts"), Argument.of(List.class, Account.class));
+        .retrieve(GET("/api/accounts"), Argument.of(List.class, Account.class));
 
     assertThat(accounts).isNotEmpty();
     assertThat(accounts).hasSize(totalAccounts);

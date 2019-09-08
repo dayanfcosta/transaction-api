@@ -1,6 +1,7 @@
 package com.dayanfcosta.revolut.transfer.model.account;
 
 import com.dayanfcosta.revolut.transfer.command.account.AccountSaveCommand;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 /**
  * @author dayan.costa
  */
+@Schema(description = "Represents a system account")
 public class Account {
 
   private long id;
@@ -33,14 +35,17 @@ public class Account {
     this.number = Validate.notBlank(number, "Account Number Invalid");
   }
 
+  @Schema(description = "ID of an account", required = true)
   public long getId() {
     return id;
   }
 
+  @Schema(description = "The number of the account", required = true)
   public String getNumber() {
     return number;
   }
 
+  @Schema(description = "The balance of an account (initial value is zero)", required = true)
   public BigDecimal getBalance() {
     return balance;
   }

@@ -37,7 +37,7 @@ class TransactionRepositoryImplTest {
   }
 
   @Test
-  @DisplayName("Should save a new transaction")
+  @DisplayName("Should create a new transaction")
   void testSave() {
     assertThat(repository.findAll()).hasSize(0);
 

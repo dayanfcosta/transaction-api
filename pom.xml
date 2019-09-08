@@ -80,6 +80,26 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.9</version>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>2.0.9</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.configuration</groupId>
+      <artifactId>micronaut-openapi</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <version>4.1.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut</groupId>
+      <artifactId>micronaut-views</artifactId>
+    </dependency>
 
     <!-- Test Dependencies -->
     <dependency>
@@ -110,6 +130,27 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>io.openapitools.swagger</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <version>2.1.0</version>
+        <configuration>
+          <resourcePackages>
+            <resourcePackage>com.dayanfcosta.revolut.transfer</resourcePackage>
+          </resourcePackages>
+          <outputDirectory>${basedir}/target/</outputDirectory>
+          <outputFilename>swagger</outputFilename>
+          <outputFormats>YAML</outputFormats>
+          <prettyPrint>true</prettyPrint>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -195,6 +236,11 @@
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-validation</artifactId>
                 <version>${micronaut.version}</version>
+              </path>
+              <path>
+                <groupId>io.micronaut.configuration</groupId>
+                <artifactId>micronaut-openapi</artifactId>
+                <version>1.2.0</version>
               </path>
             </annotationProcessorPaths>
           </configuration>

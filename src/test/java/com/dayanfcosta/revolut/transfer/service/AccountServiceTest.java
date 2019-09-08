@@ -62,7 +62,7 @@ class AccountServiceTest {
   }
 
   @Test
-  @DisplayName("Should return all accounts save")
+  @DisplayName("Should return all accounts create")
   void testFindAll() {
     assertThat(service.findAll()).hasSize(0);
 

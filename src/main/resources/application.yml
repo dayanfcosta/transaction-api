@@ -1,5 +1,20 @@
+application:
+  api:
+    swagger:
+      path: /api-docs/swagger
+      version: 3.19.4
+      layout: StandaloneLayout
+      deepLinking: true
+      urls:
+        - name: ubw-rest
+          url: /api-docs/swagger/money-transactions-api-1.0.yml
 micronaut:
   application:
     name: money-transfer
   server:
     port: 8888
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping:  ${application.api.swagger.path}/**
