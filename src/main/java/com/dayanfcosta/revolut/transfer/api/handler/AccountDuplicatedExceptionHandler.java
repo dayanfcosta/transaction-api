@@ -20,7 +20,10 @@ public class AccountDuplicatedExceptionHandler implements ExceptionHandler<Accou
 
   @Override
   public HttpResponse handle(HttpRequest request, AccountDuplicatedException exception) {
-    return HttpResponse.status(HttpStatus.CONFLICT, exception.getMessage());
+    var error = new Error(HttpStatus.CONFLICT.getCode(), exception.getMessage());
+    return HttpResponse
+        .status(HttpStatus.CONFLICT)
+        .body(error);
   }
 
 }

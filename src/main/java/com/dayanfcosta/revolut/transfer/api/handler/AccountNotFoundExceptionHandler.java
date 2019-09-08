@@ -4,6 +4,7 @@ import com.dayanfcosta.revolut.transfer.exception.AccountNotFoundException;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Produces;
 import io.micronaut.http.server.exceptions.ExceptionHandler;
 
@@ -19,7 +20,8 @@ public class AccountNotFoundExceptionHandler implements ExceptionHandler<Account
 
   @Override
   public HttpResponse handle(HttpRequest request, AccountNotFoundException exception) {
-    return HttpResponse.notFound(exception.getMessage());
+    var error = new Error(HttpStatus.NOT_FOUND.getCode(), exception.getMessage());
+    return HttpResponse.notFound(error);
   }
 
 }

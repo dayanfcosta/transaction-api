@@ -21,7 +21,10 @@ public class TransactionDuplicatedExceptionHandler implements ExceptionHandler<T
 
   @Override
   public HttpResponse handle(HttpRequest request, TransactionDuplicatedException exception) {
-    return HttpResponse.status(HttpStatus.CONFLICT, exception.getMessage());
+    var error = new Error(HttpStatus.CONFLICT.getCode(), exception.getMessage());
+    return HttpResponse
+        .status(HttpStatus.CONFLICT)
+        .body(error);
   }
 
 }
