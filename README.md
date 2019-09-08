@@ -27,7 +27,7 @@ pre-installed container/server).
 - Maven
 - JUnit 5
 - AssertJ
-- A in-memory DB hand-writter for better controll of concurrency
+- A in-memory DB hand-writter for better control of concurrency
 
 ## Runing the application
 
