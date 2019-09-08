@@ -16,15 +16,17 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public final class TransactionDto {
 
-  private final long id;
-  private final long sourceId;
+  private long id;
+  private long sourceId;
   private Long destinationId;
-  private final BigDecimal ammount;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
-  private final LocalDateTime date;
-  private final TransactionType type;
-  private final TransactionState state;
+  private BigDecimal ammount;
+  @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss")
+  private LocalDateTime date;
+  private TransactionType type;
+  private TransactionState state;
 
+  public TransactionDto() {
+  }
 
   public TransactionDto(@NotNull Transaction transaction) {
     id = transaction.getId();

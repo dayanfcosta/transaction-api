@@ -46,9 +46,9 @@ public class TransactionResource {
     return Single.just(service.findById(id));
   }
 
-  @Get("/{number}")
-  public Single<List<TransactionDto>> fromAccount(@NotBlank String number) {
-    return Single.just(service.fromAccount(number));
+  @Get("/account/{id}")
+  public Single<List<TransactionDto>> fromAccount(@NotNull long id) {
+    return Single.just(service.fromAccount(id));
   }
 
   private URI location(Transaction transaction) {

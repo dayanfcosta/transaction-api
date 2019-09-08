@@ -155,8 +155,8 @@ class TransactionServiceTest {
     transactionService.create(command);
 
     // then
-    assertThat(transactionService.fromAccount(source.getNumber())).hasSize(1);
-    assertThat(transactionService.fromAccount(destination.getNumber())).hasSize(1);
+    assertThat(transactionService.fromAccount(source.getId())).hasSize(1);
+    assertThat(transactionService.fromAccount(destination.getId())).hasSize(1);
   }
 
 }

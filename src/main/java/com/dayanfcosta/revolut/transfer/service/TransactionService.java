@@ -40,8 +40,8 @@ public class TransactionService {
     return transaction;
   }
 
-  public List<TransactionDto> fromAccount(String number) {
-    var account = accountRepository.findByNumber(number).orElseThrow(AccountNotFoundException::new);
+  public List<TransactionDto> fromAccount(long id) {
+    var account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
     return transactionRepository.findAllByAccount(account)
         .stream()
         .map(TransactionDto::new)
