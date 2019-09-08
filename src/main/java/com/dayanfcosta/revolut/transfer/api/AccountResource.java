@@ -2,7 +2,6 @@ package com.dayanfcosta.revolut.transfer.api;
 
 import com.dayanfcosta.revolut.transfer.command.account.AccountSaveCommand;
 import com.dayanfcosta.revolut.transfer.model.account.Account;
-import com.dayanfcosta.revolut.transfer.model.transaction.Transaction;
 import com.dayanfcosta.revolut.transfer.service.AccountService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Body;
