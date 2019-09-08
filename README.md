@@ -28,3 +28,14 @@ pre-installed container/server).
 - JUnit 5
 - AssertJ
 - A in-memory DB hand-writter for better controll of concurrency
+
+## Runing the application
+
+#### Requirements
+- JDK 11 or newer
+
+#### Running
+- Download the source code
+- In root folder, execute "**java -jar api.jar**"
+- The app is hosted on port 8888
+- To see all endpoints and the API documentation go to: **http://localhost:8888/api**
