@@ -28,6 +28,7 @@ pre-installed container/server).
 - JUnit 5
 - AssertJ
 - A in-memory DB hand-writter for better control of concurrency
+- Swagger for api documentation
 
 ## Runing the application
 
